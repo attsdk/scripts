@@ -5,6 +5,8 @@ set -o pipefail
 set -o nounset
 
 __usage="USAGE: $ ./attsdk-commit.sh COMMIT_MESSAGE"
+__email="att.drt.sdk@gmail.com"
+__author="attsdk"
 
 arg1="${1:-}"
 
@@ -30,10 +32,7 @@ function check_params {
 
 check_params ${arg1}
 
-git config --local user.name "attsdk"
-git config --local user.email "att.drt.sdk@gmail.com"
-
-if ! git commit -m "${arg1}" ; then
+if ! git commit --author "${__author} <${_email}>" -m "${arg1}" ; then
   tput setaf 1;
 	echo "Error: Failed to commit changes"
 	tput sgr0;
