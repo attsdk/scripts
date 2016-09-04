@@ -15,23 +15,6 @@ REPO_DIR="${2:-}"
 ###############
 ## FUNCTIONS ##
 ###############
-
-function print_error {
- 	__message="${1:-}"
- 
- 	tput setaf 1;
- 	echo "${__message}"
- 	tput sgr0;
-}
-
-function print_message {
-	 __message="${1:-}"
-
-	tput setaf 2;
-	echo "${__message}"
-	tput sgr0;
-}
-
 function check_required_params {
   __commit_message="${1:-}"
 
@@ -54,6 +37,12 @@ function exit_program {
 ##########
 ## MAIN ##
 ##########
+
+echo "Loading common.sh"
+if ! source "common.sh" ; then
+	echo "Failed to load module common.sh"
+	exit 1
+fi
 
 check_required_params ${COMMIT_MSG}
 
